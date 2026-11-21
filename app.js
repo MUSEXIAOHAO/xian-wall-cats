@@ -554,15 +554,16 @@
         prayerWheel.position.set(1.5, 0.45, 0.6);
         group.add(prayerWheel);
       }
-      // 旋转发光像素标记（高亮时可见）
+      // 旋转发光像素标记（高亮时可见）：高度要超过建筑顶部，避免被城楼挡住
+      var markerY = isGate ? 9.8 : (lm.id === 'chaoyang-coffee' ? 3.6 : 3.8);
       var marker = new THREE.Mesh(
         new THREE.PlaneGeometry(0.9, 0.9),
         new THREE.MeshBasicMaterial({ map: TEX.star, transparent: true, side: THREE.DoubleSide })
       );
-      marker.position.y = 5.6;
+      marker.position.y = markerY;
       marker.visible = false;
       group.add(marker);
-      markers[lm.id] = { mesh: marker, baseY: 5.6 };
+      markers[lm.id] = { mesh: marker, baseY: markerY };
       // 隐形点选盒
       var hit = new THREE.Mesh(
         new THREE.BoxGeometry(2.4, 6, 2.4),
@@ -782,7 +783,12 @@
       if (state.mode === 'cloud') on = Math.hypot(player.x - lm.x, player.y - lm.y) < PROX_CLOUD;
       else if (gps.pos) on = haversine(gps.pos.lat, gps.pos.lng, lm.lat, lm.lng) < PROX_REAL_M;
       if (!!state.highlighted[lm.id] !== on) { state.highlighted[lm.id] = on; changed = true; }
-      if (markers[lm.id]) markers[lm.id].mesh.visible = on;
+      if (markers[lm.id]) {
+        markers[lm.id].mesh.visible = on;
+        // 实景模式的金色高光放大 1.5 倍，更容易辨认
+        var sc = state.mode === 'real' ? 1.5 : 1;
+        markers[lm.id].mesh.scale.set(sc, sc, 1);
+      }
     });
     if (changed) {
       var near = DATA.landmarks.filter(function (lm) { return state.highlighted[lm.id]; });
