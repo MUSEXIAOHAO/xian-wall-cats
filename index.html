@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>西安城墙夜游猫猫图鉴</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-skin="classic" data-mode="cloud">
+<div class="app">
+  <header class="pixel-box header">
+    <div class="title-row">
+      <span class="title-emoji">🐾</span>
+      <h1>西安城墙<br>夜游猫猫图鉴</h1>
+      <span class="title-emoji">🌙</span>
+    </div>
+    <p class="subtitle">XI'AN WALL · NIGHT CATS · 10 只流浪猫，等你点亮</p>
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+      <span class="progress-text" id="progressText">图鉴 0 / 10</span>
+    </div>
+  </header>
+
+  <section class="pixel-box skin-box">
+    <div class="section-title">🎨 界面皮肤 <span class="hint">切换会改变氛围，还会小幅提高对应气质猫的掉率</span></div>
+    <div class="skin-row" id="skinRow">
+      <button class="skin-btn active" data-skin="classic">🏯 古风城墙</button>
+      <button class="skin-btn" data-skin="night">🌃 现代夜色</button>
+      <button class="skin-btn" data-skin="cyber">🌆 赛博霓虹</button>
+    </div>
+  </section>
+
+  <section class="pixel-box mode-box">
+    <div class="section-title">🧭 游览模式</div>
+    <div class="mode-row">
+      <button class="mode-btn active" data-mode="cloud">☁️ 线上云逛</button>
+      <button class="mode-btn" data-mode="real">📍 城墙实景</button>
+    </div>
+    <p class="mode-desc" id="modeDesc">云逛模式：点下面的城门节点，随时随地触发猫猫掉落（每次冷却 5 秒）。</p>
+    <div class="real-panel" id="realPanel" hidden>
+      <div class="loc-line">你的位置：<span id="locStatus">未定位</span></div>
+      <div class="loc-line">最近城门：<span id="nearestGate">—</span> <span id="nearestDist">—</span></div>
+      <button class="pixel-btn big" id="locBtn">📍 获取我的位置</button>
+      <button class="pixel-btn big encounter" id="encounterBtn" disabled>🐱 偶遇猫猫（需走近 80 米内）</button>
+      <button class="pixel-btn small debug" id="debugBtn">🛠️ 室内测试：模拟走近最近城门</button>
+    </div>
+  </section>
+
+  <section class="pixel-box wall-box">
+    <div class="section-title">🧱 像素城墙 · 六扇城门</div>
+    <div class="wall" id="wall"></div>
+    <p class="wall-hint" id="wallHint">点一扇城门，云散步出发 →</p>
+  </section>
+
+  <section class="pixel-box dex-box">
+    <div class="section-title">📖 猫猫图鉴 <span class="hint">点已收集的猫，打开像素记忆明信片</span></div>
+    <div class="dex-grid" id="dexGrid"></div>
+  </section>
+
+  <footer class="footer">
+    <p>进度保存在本机浏览器（localStorage）· 数据见 cats.json</p>
+    <p>🐱 城墙上的猫不属于任何人，只属于今晚路过的人</p>
+  </footer>
+</div>
+
+<div class="modal-mask" id="modalMask" hidden>
+  <div class="modal pixel-box" id="postcard">
+    <button class="modal-close" id="modalClose">✕</button>
+    <div class="card-emoji" id="cardEmoji">🐱</div>
+    <div class="card-name" id="cardName">霸道橘猫</div>
+    <div class="card-rarity" id="cardRarity">★ 常见</div>
+    <div class="card-meta" id="cardMeta">永宁门 · 2026-11-22 21:00</div>
+    <p class="card-story" id="cardStory"></p>
+    <label class="note-label" for="cardNote">今晚心情 / 偶遇笔记</label>
+    <textarea id="cardNote" rows="2" maxlength="80" placeholder="写一句今晚的心情…（最多 80 字）"></textarea>
+    <button class="pixel-btn big" id="saveNoteBtn">💾 保存笔记</button>
+    <p class="card-tip">📸 直接截屏，就是一张像素记忆明信片</p>
+  </div>
+</div>
+
+<div class="toast" id="toast" hidden></div>
+
+<script src="app.js"></script>
+</body>
+</html>
