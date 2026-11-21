@@ -3,17 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>西安城墙微缩像素世界</title>
+<title>3D 像素西安城墙夜游世界</title>
 <link rel="stylesheet" href="style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.149.0/three.min.js"></script>
 </head>
-<body data-skin="classic" data-mode="cloud">
+<body data-skin="classic" data-mode="cloud" data-view="third">
 <div class="app">
   <header class="topbar">
     <div class="top-title">
       <span class="top-emoji">🏯</span>
       <div>
-        <h1>西安城墙微缩像素世界</h1>
-        <p class="top-sub">XI'AN WALL MINI WORLD · 36 件风物</p>
+        <h1>3D 像素西安城墙夜游世界</h1>
+        <p class="top-sub">XI'AN WALL 3D VOXEL WORLD · 36 件风物</p>
       </div>
     </div>
     <div class="top-controls">
@@ -22,9 +23,9 @@
         <button class="mode-btn" data-mode="real">📍 实景</button>
       </div>
       <div class="skin-row" id="skinRow">
-        <button class="skin-btn active" data-skin="classic">🏯 古风</button>
-        <button class="skin-btn" data-skin="night">🌃 夜色</button>
-        <button class="skin-btn" data-skin="cyber">🌆 霓虹</button>
+        <button class="skin-btn active" data-skin="classic">🏯 古风夜游</button>
+        <button class="skin-btn" data-skin="night">🌃 现代夜色</button>
+        <button class="skin-btn" data-skin="cyber">🌆 赛博霓虹</button>
       </div>
     </div>
     <div class="progress-wrap">
@@ -34,24 +35,17 @@
   </header>
 
   <main class="map-wrap" id="mapWrap">
-    <canvas id="map"></canvas>
-    <div class="map-hint" id="mapHint">拖动地图 · 双指缩放 · 点地面让小人走过去</div>
-
-    <div class="dpad" id="dpad">
-      <button class="dpad-btn up" data-dir="up">▲</button>
-      <button class="dpad-btn left" data-dir="left">◀</button>
-      <button class="dpad-btn right" data-dir="right">▶</button>
-      <button class="dpad-btn down" data-dir="down">▼</button>
-    </div>
-
-    <div class="zoom-col">
-      <button class="zoom-btn" id="zoomIn">＋</button>
-      <button class="zoom-btn" id="zoomOut">－</button>
-      <button class="zoom-btn wide" id="recenter">◎ 回到主角</button>
-    </div>
-
+    <div id="sceneBox"></div>
+    <div class="map-hint" id="mapHint">左摇杆走路 · 右半屏滑动转镜头</div>
+    <button class="view-btn" id="viewBtn">🎥 第三人称</button>
     <button class="debug-btn" id="debugBtn" hidden>🛠️ 室内测试：模拟瞬移到朝阳门</button>
     <div class="gps-line" id="gpsLine" hidden>定位中…</div>
+
+    <div class="joystick" id="joystick">
+      <div class="joy-knob" id="joyKnob"></div>
+    </div>
+
+    <button class="explore-btn" id="exploreBtn" hidden>🔍 探索：永宁门</button>
   </main>
 
   <footer class="bottombar">
